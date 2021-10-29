@@ -14,9 +14,6 @@ import com.kh.web.member.model.vo.Member;
 
 /**
  * Servlet은 Controller역할을 담담한다.
- * 
- * insert into tb_member values('honggd', '1234', '홍길동', '900909-1234567', 'honggd@gmail.com', '01012341234', '개발자', ' 독서,영화', default );
- *  
  */
 @WebServlet("/member/enroll.do")
 public class MemberEnrollServlet extends HttpServlet {
@@ -46,9 +43,9 @@ public class MemberEnrollServlet extends HttpServlet {
 			
 			String ssn = ssn1 + "-" + ssn2;
 			String tel = tel1 + tel2 + tel3;
-			String hobby = hobbies != null ? String.join(",", hobbies) : "";
+			String hobby = hobbies != null ? String.join(",", hobbies) : ""; // join 메소드
 					
-			Member member = new Member(userId, pwd, userName, ssn, email, tel, job, hobby, null);
+			Member member = new Member(userId, pwd, userName, ssn, email, tel, job, hobby, null); // regDate default로 처리하기 위해 null로 넘긴다.
 			System.out.println("member@servlet = " + member);
 			
 			// 2. 업무로직 : db에 insert요청
@@ -63,6 +60,7 @@ public class MemberEnrollServlet extends HttpServlet {
 		} catch(Exception e) {
 			e.printStackTrace();
 			throw e;
+			// 밑에서부터 던진 ErrorMessage를 Tomcat에게 던진다.
 		}
 	}
 

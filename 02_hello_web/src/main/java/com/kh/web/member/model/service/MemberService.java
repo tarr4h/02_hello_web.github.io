@@ -21,7 +21,7 @@ public class MemberService {
 	 * DML
 	 * 1. Connection생성
 	 * 2. Dao 메소드호출(Connection 전달)
-	 * 3. trasaction처리
+	 * 3. trasaction처리 (commit / rollback)
 	 * 4. Connection 자원반납
 	 * 
 	 * @param member
@@ -30,6 +30,10 @@ public class MemberService {
 	public int insertMember(Member member) {
 		Connection conn = null;
 		int result = 0;
+		
+		// 완성형 transaction 처리
+		// exception이 발생하는 경우에만 rollbakc 되도록 try/catch절 처리
+		// 예외는 Servlet(controller)까지 던져서, Tomcat이 처리하도록 함.
 		try {
 			conn = getConnection();
 			result = memberDao.insertMember(conn, member);

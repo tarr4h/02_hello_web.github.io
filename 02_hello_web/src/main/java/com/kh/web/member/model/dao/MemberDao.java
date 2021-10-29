@@ -31,9 +31,6 @@ public class MemberDao {
 	 * 2. 실행 executeUpdate:int
 	 * 3. 자원반납
 	 * 
-	 * @param conn
-	 * @param member
-	 * @return
 	 */
 	public int insertMember(Connection conn, Member member) {
 		PreparedStatement pstmt = null;
@@ -55,6 +52,7 @@ public class MemberDao {
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
+			// Error메시지 처리하기, Servlet까지 던진다.
 			throw new RuntimeException("회원가입 실패!", e);
 		} finally {
 			// 3. 자원반납
