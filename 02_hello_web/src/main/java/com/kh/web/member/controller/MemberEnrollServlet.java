@@ -49,11 +49,12 @@ public class MemberEnrollServlet extends HttpServlet {
 			
 			// 2. 업무로직 : db에 insert요청
 			int result = memberService.insertMember(member);
-			request.setAttribute("result", result);
+			
 			
 			
 			// 3. 응답 html 처리 : jsp에 위임
 			// 결과페이지에서 보여줄 정보 처리
+			// 1. 사용자정보
 			request.setAttribute("userId", userId);
 			request.setAttribute("userName", userName);
 			request.setAttribute("ssn1", ssn1);
@@ -62,7 +63,8 @@ public class MemberEnrollServlet extends HttpServlet {
 			request.setAttribute("job", job);
 			request.setAttribute("hobby", hobby);
 			
-			
+			// 2. 회원가입 처리 결과(1 or 0)
+			request.setAttribute("result", result);
 			
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/memberEnrollEnd.jsp");
 			requestDispatcher.forward(request, response);

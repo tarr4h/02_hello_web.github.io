@@ -1,46 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String userId = request.getParameter("userId");
-	String pwd = request.getParameter("pwd");
-	String userName = request.getParameter("userName");
-	String ssn1 = request.getParameter("ssn1");
-	String ssn2 = request.getParameter("ssn2");
-	String email = request.getParameter("email");
-	String tel1 = request.getParameter("tel1");
-	String tel2 = request.getParameter("tel2");
-	String tel3 = request.getParameter("tel3");
-	String job = request.getParameter("job");
-	String[] hobbies = request.getParameterValues("hobby");
+	String userId = (String)request.getAttribute("userId");
+	String userName = (String)request.getAttribute("userName");
+	String ssn1 = (String)request.getAttribute("ssn1");
+	String email = (String)request.getAttribute("email");
+	String tel = (String)request.getAttribute("tel");
+	String job = (String)request.getAttribute("job");
+	String hobby = (String)request.getAttribute("hobby");
 	
-	String ssn = ssn1 + "-" + ssn2;
-	String tel = tel1 + tel2 + tel3;
-	String hobby = hobbies != null ? String.join(",", hobbies) : "";
+	String result = null;
+	if((int)request.getAttribute("result") == 1) {
+		result = "회원 가입이 정상적으로 이루어졌습니다.";
+	} else {
+		result = "회원가입이 정상적으로 이루어지지 않았습니다.";
+	}
 	
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>가입처리 결과</title>
 </head>
 <body>
 <script>
-	const member = `회원 등록 정보
-----------------------------------
-아이디 : <%= userId %>
-비밀번호 : <%= pwd %> 
-이름 : <%= userName %>
-주민번호 : <%= ssn %>
-이메일 : <%= email %>
-전화번호 : <%= tel %>
-직업 : <%= job %>
-취미 : <%= hobby %>
-----------------------------------
-처리결과 : <%= msg %>`;
-alert(member);
-location.href = "<%= request.getContextPath() %>";
-
+	const enrollResult = `환영합니다.
+	<%= result %>
+	ID : <%= userId %>
+	NAME : <%= userName %>
+	SSN : <%= ssn1 %> - *******
+	E-MAIL : <%= email %>
+	TEL : <%= tel %>
+	JOB : <%= job %>
+	HOBBY : <%= hobby %>	
+	`
+	alert(enrollResult);
+	location.href = "<%= request.getContextPath() %>";
 </script>
 </body>
 </html>
