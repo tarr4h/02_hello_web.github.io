@@ -46,15 +46,24 @@ public class MemberEnrollServlet extends HttpServlet {
 			String hobby = hobbies != null ? String.join(",", hobbies) : ""; // join 메소드
 					
 			Member member = new Member(userId, pwd, userName, ssn, email, tel, job, hobby, null); // regDate default로 처리하기 위해 null로 넘긴다.
-			System.out.println("member@servlet = " + member);
 			
 			// 2. 업무로직 : db에 insert요청
 			int result = memberService.insertMember(member);
-			String msg = result > 0 ? "회원 등록 성공!" : "회원 등록 실패!";
+			request.setAttribute("result", result);
+			
 			
 			// 3. 응답 html 처리 : jsp에 위임
-			// 사용자입력값 확인 및 등록 성공메세지 통보, 성공메세지 확인시 index페이지로 이동.
-			request.setAttribute("msg", msg);
+			// 결과페이지에서 보여줄 정보 처리
+			request.setAttribute("userId", userId);
+			request.setAttribute("userName", userName);
+			request.setAttribute("ssn1", ssn1);
+			request.setAttribute("email", email);
+			request.setAttribute("tel", tel);
+			request.setAttribute("job", job);
+			request.setAttribute("hobby", hobby);
+			
+			
+			
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/memberEnrollEnd.jsp");
 			requestDispatcher.forward(request, response);
 		} catch(Exception e) {

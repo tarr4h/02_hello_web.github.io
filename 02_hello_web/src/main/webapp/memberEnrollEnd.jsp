@@ -17,7 +17,6 @@
 	String tel = tel1 + tel2 + tel3;
 	String hobby = hobbies != null ? String.join(",", hobbies) : "";
 	
-	String msg = (String) request.getAttribute("msg");
 %>
 <!DOCTYPE html>
 <html>
