@@ -48,8 +48,7 @@ public class MemberEnrollServlet extends HttpServlet {
 			Member member = new Member(userId, pwd, userName, ssn, email, tel, job, hobby, null); // regDate default로 처리하기 위해 null로 넘긴다.
 			
 			// 2. 업무로직 : db에 insert요청
-			int result = memberService.insertMember(member);
-			
+			int result = memberService.insertMember(member);			
 			
 			
 			// 3. 응답 html 처리 : jsp에 위임
